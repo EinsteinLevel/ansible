@@ -1,34 +1,50 @@
 ---
-- name: install nginx
-  hosts: web
+- name: install maven
+  hosts: build
   become: yes
+  remote_user: root
 
   tasks:
-  - name: Ensure nginx package is present
-    apt:
-      name: nginx
-      state: present
-  - name: index.html is present
-    copy:
-      src: index.html
-      dest: /var/www/html/
+  - name: Update repositories cache and install packages
+    apt: pkg={{item}} state=latest
+    with_item:
+      - default-jdk
+      - maven
+      - git
+    update_cache: yes
 
-  - name: Ensure nginx service is started
-    service:
-      name: nginx
-      state: started
+  - name: Clone a repo in ~./
+    ansible.builtin.git:
+      repo: https://github.com/boxfuse/boxfuse-sample-java-war-hello.git
+      dest: /home/admin
+
+  - name: Build war. artifact
+    ansible.builtin.shell:
+      cmd: mvn package
+      chdir: /home/admin/boxfuse-sample-java-war-hello
 
 - name: install db
-  hosts: db
+  hosts: prod
   become: yes
+  remote_user: root
 
   tasks:
-  - name: Ensure postgresql package is present
-    apt:
-      name: postgresql
-      state: present
-
-  - name: Ensure postgresql service is started
+  - name: Update repositories cache and install packages
+    apt: pkg={{item}} state=installed
+    with_item:
+      - openjdk11-jre-headless
+      - openjdk11
+      - tomcat9
     service:
-     name: postgresql
-     state: started
+      name: tomcat
+      state: started
+
+- name: Rsync some files
+  hosts: prod
+
+  tasks:
+  - name: copy my file
+    synchronize:
+      src: /home/admin/boxfuse-sample-java-war-hello/target/*.war
+      dest: /var/lib/tomcar/webapps
+    delegate_to: prod
