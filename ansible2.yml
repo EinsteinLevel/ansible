@@ -1,0 +1,23 @@
+---
+- name: Install nginx
+  hosts: all
+  become: yes
+
+  vars:
+    source_folder: ./config
+    dest_folder: /var/www/html/config
+
+  tasks:
+  - name: Ensure nginx packages is present
+    apt:
+      name: nginx
+      state: present
+
+  - name: Temlating
+    template: src={{source_folder}}/index.j2 destination={{dest_folder}}/index.html mode=0555
+    notify: 
+      - restart nginx
+
+handlers:
+- name: restart nginx
+  service: name=nginx state=restarted
