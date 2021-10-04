@@ -61,4 +61,4 @@
     synchronize:
       src: /home/admin/boxfuse-sample-java-war-hello/target/*.war
       dest: /var/lib/tomcat/webapps
-    delegate_to: prod
+    delegate_to:prod
