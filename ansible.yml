@@ -15,12 +15,12 @@
       update_cache: yes
 
 
-  - name: Clone a repo
+- name: Clone a repo
     ansible.builtin.git:
       repo: https://github.com/boxfuse/boxfuse-sample-java-war-hello.git
       dest: /home/admin
 
-  - name: Build war. artifact
+- name: Build war. artifact
     ansible.builtin.shell:
       cmd: mvn package
       chdir: /home/admin/boxfuse-sample-java-war-hello
