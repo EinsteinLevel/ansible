@@ -38,14 +38,14 @@
   become: yes
 
   tasks:
-- name: Install a list of packages
-    apt:
-      name: "{{ packages_tomcat }}"
-    vars:
-      packages_tomcat:
-      - default-jdk
-      - tomcat9
-    state: latest
+  - name: Install a list of packages
+      apt:
+        name: "{{ packages }}"
+      vars:
+        packages:
+        - default-jdk
+        - tomcat9
+      state: latest
 
 - name: Rsync some files
   hosts: prod
