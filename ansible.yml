@@ -31,12 +31,12 @@
   - name: Clone a github repository
     git:
       repo: git clone https://github.com/boxfuse/boxfuse-sample-java-war-hello.git
-      dest: /home/admin/
+      dest: /home/admin/boxfuse
 
   - name: Build war. artifact
     shell: mvn package
     args:
-      chdir: /home/admin/boxfuse-sample-java-war-hello
+      chdir: /home/admin/boxfuse
 
 - name: install tomcat server
   hosts: prod
@@ -59,6 +59,6 @@
   tasks:
   - name: copy my file
     synchronize:
-      src: /home/admin/boxfuse-sample-java-war-hello/target/hello-1.0.war
+      src: /home/admin/boxfuse/target/hello-1.0.war
       dest: /var/lib/tomcat9/webapps/
     delegate_to: "{{groups['build'][0]}}"
