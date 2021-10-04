@@ -53,7 +53,7 @@
       state: latest
 
 - name: Rsync some files
-  hosts: prod
+  hosts: build
 
   tasks:
   - name: copy my file
