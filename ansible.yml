@@ -23,11 +23,6 @@
       - git
     state: latest
 
-  - name:
-    file:
-      path: /home/admin/boxfuse-sample-java-war-hello
-      state: absent
-
   - name: Clone a github repository
     git:
       repo: git clone https://github.com/boxfuse/boxfuse-sample-java-war-hello.git
