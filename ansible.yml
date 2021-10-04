@@ -17,10 +17,10 @@
     apt:
       name: "{{ packages }}"
     vars:
-    packages:
-    - default-jdk
-    - maven
-    - git
+      packages:
+      - default-jdk
+      - maven
+      - git
     state: latest
 
   - name: Clone a github repository
@@ -40,11 +40,11 @@
   tasks:
 - name: Install a list of packages
     apt:
-      name: "{{ packages }}"
+      name: "{{ packages_tomcat }}"
     vars:
-    packages:
-    - default-jdk
-    - tomcat9
+      packages_tomcat:
+      - default-jdk
+      - tomcat9
     state: latest
 
 - name: Rsync some files
