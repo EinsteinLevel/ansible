@@ -17,7 +17,7 @@
 
 
   - name: Clone a github repository
-     git:
+     ansible.builtin.git:
        repo: https://github.com/boxfuse/boxfuse-sample-java-war-hello.git
        dest: /home/admin/
        clone: yes
