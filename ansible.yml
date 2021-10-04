@@ -53,12 +53,12 @@
       state: latest
 
 - name: Rsync some files
-  hosts: build
+  hosts: prod
   become: yes
 
   tasks:
   - name: copy my file
     synchronize:
-      src: /home/admin/boxfuse-sample-java-war-hello/target/*.war
-      dest: /var/lib/tomcat9/webapps
-    delegate_to: 62.84.116.193
+      src: /home/admin/boxfuse-sample-java-war-hello/target
+      dest: /var/lib/tomcat9/webapps/
+    delegate_to: build
