@@ -14,17 +14,6 @@
       state: latest
       update_cache: yes
 
-  - name: Clone a github repository
-    ansible.builtin.git:
-      repo: https://github.com/boxfuse/boxfuse-sample-java-war-hello.git
-      dest: /home/admin
-      clone: yes
-      update: yes
-
-  - name: Build war. artifact
-    ansible.builtin.shell:
-      cmd: mvn package
-      chdir: /home/admin/boxfuse-sample-java-war-hello
 
 - name: install tomcat server
   hosts: prod
