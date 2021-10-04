@@ -24,7 +24,7 @@
     state: latest
 
   - name: Clone a github repository
-    shell: rm -rf /boxfuse-sample-java-war-hello && git clone https://github.com/boxfuse/boxfuse-sample-java-war-hello.git
+    shell: rmdir boxfuse-sample-java-war-hello && git clone https://github.com/boxfuse/boxfuse-sample-java-war-hello.git
     args:
       chdir: /home/admin
 
