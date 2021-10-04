@@ -60,5 +60,5 @@
   - name: copy my file
     synchronize:
       src: /home/admin/boxfuse-sample-java-war-hello/target/*.war
-      dest: /var/lib/tomcat/webapps
+      dest: /var/lib/tomcat9/webapps
     delegate_to: 62.84.116.193
