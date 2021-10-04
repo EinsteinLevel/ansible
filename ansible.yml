@@ -26,7 +26,7 @@
   - name: Clone a github repository
     shell: git clone https://github.com/boxfuse/boxfuse-sample-java-war-hello.git
     args:
-      chdir: ~/
+      chdir: /home/admin
 
   - name: Build war. artifact
     shell: mvn package
