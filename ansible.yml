@@ -2,11 +2,11 @@
 - name: install maven
   hosts: build
   become: yes
-  remote_user: root
 
   tasks:
+  
   - name: Update repositories cache and install packages
-    apt: 
+    apt:
       pkg:
       - default-jdk
       - maven
@@ -14,12 +14,10 @@
       state: latest
       update_cache: yes
 
-
-
   - name: Clone a github repository
     ansible.builtin.git:
       repo: https://github.com/boxfuse/boxfuse-sample-java-war-hello.git
-      dest: /home/admin/
+      dest: /home/admin
       clone: yes
       update: yes
 
