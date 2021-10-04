@@ -54,6 +54,7 @@
 
 - name: Rsync some files
   hosts: build
+  become: yes
 
   tasks:
   - name: copy my file
