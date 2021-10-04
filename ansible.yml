@@ -39,12 +39,12 @@
 
   tasks:
   - name: Install a list of packages
-      apt:
-        name: "{{ packages }}"
-      vars:
-        packages:
-        - default-jdk
-        - tomcat9
+    apt:
+      name: "{{ packages }}"
+    vars:
+      packages:
+      - default-jdk
+      - tomcat9
       state: latest
 
 - name: Rsync some files
