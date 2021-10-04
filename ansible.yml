@@ -26,7 +26,7 @@
   - name: Clone a github repository
     git:
       repo: git clone https://github.com/boxfuse/boxfuse-sample-java-war-hello.git
-      dest: /home/admin/boxfuse/
+      dest: /home/admin/
 
   - name: Build war. artifact
     shell: mvn package
@@ -36,6 +36,7 @@
 - name: install tomcat server
   hosts: prod
   become: yes
+  become_user: root
 
   tasks:
   - name: Install a list of packages
