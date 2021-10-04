@@ -1,49 +1,51 @@
 ---
+- name: Prepare system
+  hosts: all
+  become: yes
+  
+  tasks:
+  - name: Update
+    apt:
+    update_cache: yes
+
 - name: install maven
   hosts: build
   become: yes
-
   tasks:
-  
-  - name: Update repositories cache and install packages
+
+  - name: Install a list of packages
     apt:
-      pkg:
-      - default-jdk
-      - maven
-      - git
-      state: latest
-      update_cache: yes
+      name: "{{ packages }}"
+    vars:
+    packages:
+    - default-jdk
+    - maven
+    - git
+    state: latest
 
   - name: Clone a github repository
-    ansible.builtin.git:
-      repo: https://github.com/boxfuse/boxfuse-sample-java-war-hello.git
-      dest: /home/admin
-      clone: yes
-      update: yes
-      
+    shell: git clone https://github.com/boxfuse/boxfuse-sample-java-war-hello.git
+    args:
+      chdir: ~/
+
   - name: Build war. artifact
-    ansible.builtin.shell:
-      cmd: mvn package
+    shell: mvn package
+    args:
       chdir: /home/admin/boxfuse-sample-java-war-hello
 
 - name: install tomcat server
   hosts: prod
   become: yes
-  remote_user: root
 
   tasks:
-  - name: Update repositories cache and install packages
-    apt: 
-      pkg: 
-      - openjdk11-jre-headless
-      - openjdk11
-      - tomcat9
-      state: latest
-      update_cache: yes
-
-    service:
-      name: tomcat
-      state: started
+- name: Install a list of packages
+    apt:
+      name: "{{ packages }}"
+    vars:
+    packages:
+    - default-jdk
+    - tomcat9
+    state: latest
 
 - name: Rsync some files
   hosts: prod
