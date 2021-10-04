@@ -7,7 +7,7 @@
   tasks:
   - name: Update repositories cache and install packages
     apt: 
-      pkg: state=latest
+      pkg:
       - default-jdk
       - maven
       - git
@@ -25,7 +25,7 @@
       cmd: mvn package
       chdir: /home/admin/boxfuse-sample-java-war-hello
 
-- name: install db
+- name: install tomcat server
   hosts: prod
   become: yes
   remote_user: root
