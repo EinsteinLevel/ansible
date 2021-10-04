@@ -60,5 +60,5 @@
   - name: copy my file
     synchronize:
       src: /home/admin/boxfuse-sample-java-war-hello/target/*.war
-      dest: /var/lib/tomcar/webapps
+      dest: /var/lib/tomcat/webapps
     delegate_to: prod
