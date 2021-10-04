@@ -48,8 +48,8 @@
       name: "{{ packages }}"
     vars:
       packages:
-      - default-jdk
       - tomcat9
+      - default-jdk
       state: latest
 
 - name: Rsync some files
