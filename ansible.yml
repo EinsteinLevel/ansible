@@ -29,9 +29,9 @@
       state: absent
 
   - name: Clone a github repository
-    shell: git clone https://github.com/boxfuse/boxfuse-sample-java-war-hello.git
-    args:
-      chdir: /home/admin
+    git:
+      repo: git clone https://github.com/boxfuse/boxfuse-sample-java-war-hello.git
+      dest: /home/admin/
 
   - name: Build war. artifact
     shell: mvn package
